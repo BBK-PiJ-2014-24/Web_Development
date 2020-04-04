@@ -1,0 +1,7 @@
+extends layout
+
+block my_content_code
+    form(action="/hello", method="post")
+        label Please Enter Name:   
+            input(type='text', name='username')
+        button(type='submit') Submit

@@ -1,0 +1,37 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "REST_API",
+      "runtimeExecutable": "/home/stewart/.nvm/versions/node/v11.6.0/bin/node",
+      "program": "${workspaceFolder}/REST_API/app.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/Debug_JS/bin/www",
+      "runtimeExecutable": "/home/stewart/.nvm/versions/node/v11.6.0/bin/node"
+    }
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Express_Traversy",
+      "runtimeExecutable": "/home/stewart/.nvm/versions/node/v11.6.0/bin/node",
+      "program": "${workspaceFolder}/Express_Traversy/index.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

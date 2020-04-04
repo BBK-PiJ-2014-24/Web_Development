@@ -1,0 +1,24 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* fr = fraction*/
+  height: 50vh;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "box1 box2"
+    "box3 .";
+}
+
+.box1 {
+  grid-area: box1;
+  background: lightcoral;
+}
+
+.box2 {
+  grid-area: box2;
+  background: lightblue;
+}
+
+.box3 {
+  grid-area: box3;
+  background: lightgreen;
+}

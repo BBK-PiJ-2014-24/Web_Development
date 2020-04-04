@@ -1,0 +1,19 @@
+{
+  "name": "node_intro",
+  "version": "1.0.0",
+  "description": "Traversy Media Examples",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm http_server.js",
+    "dev": "nodemon http_server.js",
+    "dev2": "nodemon http_server_pt2.js"
+  },
+  "author": "Stewart N",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "uuid": "^3.4.0"
+  }
+}

@@ -1,0 +1,10 @@
+@import "./variables";
+@import "./header";
+@import "./mixins";
+
+.contact {
+  @include flexCenter();
+
+  height: 15vh;
+  background: rgb(224, 128, 128);
+}

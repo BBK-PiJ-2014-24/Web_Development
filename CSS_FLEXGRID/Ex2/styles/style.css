@@ -1,0 +1,42 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  font-family: Avenir, Roboto, Helvetica, san-serif;
+  font-size: 80%;
+}
+
+article {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  display: flex;
+  flex-flow: column;
+  padding: 2rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+article > button {
+  margin-top: auto;
+  background: teal;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+}
+
+article > img {
+  order: -1;
+  align-self: center;
+}
+article > ul {
+  margin: 0 0 1rem;
+}
+
+article > p {
+  margin: 0.25em 1rem 1rem;
+}
+article > h1 {
+  margin: 1rem 1rem 0;
+}

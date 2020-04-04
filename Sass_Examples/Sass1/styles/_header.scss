@@ -1,0 +1,13 @@
+@include flexCenter();
+header {
+  @include flexCenter();
+  height: 10vh;
+  background: rgb(11, 170, 19);
+  color: $textColor;
+  button {
+    background: $primaryButton;
+    &:hover {
+      background: rgb(56, 184, 109);
+    }
+  }
+}
