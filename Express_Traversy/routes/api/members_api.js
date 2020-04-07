@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
     id: uuid.v4(),
     name: req.body.name,
     email: req.body.email,
-    status: "active"
+    status: "active",
   };
 
   if (!newMember.name || !newMember.email) {
@@ -45,6 +45,26 @@ router.post("/", (req, res) => {
   members.push(newMember);
   res.json(members);
   // res.redirect('/');
+});
+
+// PUT - Update Member
+router.put("/:id", (req, res) => {
+  const isMember = members.some((m) => m.id === parseInt(req.params.id));
+
+  if (isMember) {
+    const updateMember = req.body; // body contains id, name, email for update
+    const foundMember = members.filter((m) => m.id === parseInt(req.params.id));
+    foundMember.name = updateMember.name ? foundMember.name : updateMember.name;
+    foundMember.email = updateMember.email
+      ? foundMember.email
+      : updateMember.email;
+    res.json({
+      msg: `Member id:${req.params.id} Records updated`,
+      member: foundMember,
+    });
+  } else {
+    res.json({ msg: `Member id ${req.params.id} not found` });
+  }
 });
 
 // Routes for Non API pages
