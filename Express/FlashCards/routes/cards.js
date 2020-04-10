@@ -1,3 +1,5 @@
+// This is router for the Quiz Game of Trivia Cards
+// ------------------------------------------------
 const express = require("express");
 const router = express.Router();
 const { data } = require("../data/flashcardData.json"); // equiv to data = require().data
@@ -5,7 +7,6 @@ const { cards } = data; // cards = data.cards
 
 // Card Page
 // ---------
-
 router.get("/", (req, res) => {
   const numberOfCards = cards.length;
   const flashcardId = Math.floor(Math.random() * numberOfCards);

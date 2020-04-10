@@ -19,7 +19,7 @@ app.use("/static", express.static("public")); // add via /static route
 
 // Include Routes of all Pages on the Website
 // ------------------------------------------
-const mainRoutes = require("./routes"); //own routes module. No need to refer file if =index
+const mainRoutes = require("./routes/index"); //own routes module. No need to refer file if =index
 const cardRoutes = require("./routes/cards");
 app.use(mainRoutes);
 app.use("/cards", cardRoutes);
