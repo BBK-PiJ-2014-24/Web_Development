@@ -1,11 +1,15 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize({ dialect: "sqlite", storage: "movies.db" }); // storage ref to database
+const sequelize = new Sequelize({
+  dialect: "sqlite",
+  storage: "movies.db",
+  logging: true,
+}); // storage ref to database; logging logs all insertions/queries to console
 
 // Create a table/model class that extends Sequelize.Model
 class Movie extends Sequelize.Model {}
 
-// Initialize the table/model with title column
+// Initialize the table/model schema with title column
 Movie.init(
   {
     title: Sequelize.STRING,
@@ -20,10 +24,17 @@ Movie.init(
   try {
     await sequelize.authenticate(); // test the connection to the db
     console.log("Connection to the database successful!");
-    const movie = await Movie.create({
-      title: "Toy Story",
-    });
-    console.log(movie.toJSON());
+
+    const movieRows = await Promise.all([
+      await Movie.create({
+        title: "Toy Story",
+      }),
+
+      await Movie.create({
+        title: "The Incredibles",
+      }),
+    ]);
+    const moviesJSON = movieRows.map((m) => m.toJSON());
   } catch (error) {
     console.error("Error connecting to the database: ", error);
   }
