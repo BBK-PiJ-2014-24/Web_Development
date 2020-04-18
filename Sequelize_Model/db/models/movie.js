@@ -31,7 +31,10 @@ module.exports = (sequelize) => {
       releaseDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
-        validate: {},
+        validate: {
+          notNull: { msg: "Null Not Allowed" },
+          isAfter: { args: "1950-01-01", msg: "Fills after 1950" },
+        },
       },
 
       isAvailableOnVHS: {
