@@ -11,7 +11,34 @@ module.exports = (sequelize) => {
 
   Movie.init(
     {
-      title: Sequelize.STRING,
+      // set custom primary key
+      id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Provide Title" },
+          notEmpty: { msg: "Provide Title" },
+        },
+      },
+      runtime: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          min: { args: 1, msg: "time must be > 1min" },
+        },
+      },
+      releaseDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {},
+      },
+
+      isAvailableOnVHS: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
     { sequelize }
   );

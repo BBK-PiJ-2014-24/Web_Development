@@ -1,3 +1,7 @@
+// App.js
+// ------
+// The file that runs the data insertions and queries
+
 //the db module has the ORM connection, the tables and the Sequelize library
 const db = require("./db");
 //grab the movie model table
@@ -15,10 +19,16 @@ const { Movie } = db.models;
       // insert row 1 in movie table
       await Movie.create({
         title: "Toy Story",
+        runtime: 81,
+        releaseDate: "1995-11-22",
+        isAvailableOnVHS: true,
       }),
       // insert row 2 in movie table
       await Movie.create({
         title: "The Incredibles",
+        runtime: 115,
+        releaseDate: "2004-04-14",
+        isAvailableOnVHS: true,
       }),
     ]);
     const moviesJSON = movieRows.map((m) => m.toJSON());
