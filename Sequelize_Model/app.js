@@ -33,7 +33,12 @@ const { Movie } = db.models;
     ]);
     const moviesJSON = movieRows.map((m) => m.toJSON());
     console.log(moviesJSON);
-  } catch (error) {
-    console.error("Error connecting to the database: ", error);
+  } catch (err) {
+    if (err.name === "SequelizeValidationError") {
+      const reportErrors = err.errors.map((e) => e.message);
+      console.error("Validation Errors: ", reportErrors);
+    } else {
+      throw err;
+    }
   }
 })();
