@@ -5,7 +5,7 @@
 //the db module has the ORM connection, the tables and the Sequelize library
 const db = require("./db");
 //grab the movie model table
-const { Movie } = db.models;
+const { Movie, Person } = db.models;
 
 // async IIFE automatically runs the table inserts
 (async () => {
@@ -29,6 +29,11 @@ const { Movie } = db.models;
         runtime: 115,
         releaseDate: "2004-04-14",
         isAvailableOnVHS: true,
+      }),
+      // insert row 1 in Person table
+      await Person.create({
+        firstName: "Tom",
+        lastName: "Hanks",
       }),
     ]);
     const moviesJSON = movieRows.map((m) => m.toJSON());
