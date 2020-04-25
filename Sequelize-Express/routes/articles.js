@@ -31,8 +31,22 @@ router.get("/new", (req, res) => {
 router.post(
   "/",
   asyncHandler(async (req, res) => {
-    const article = await Article.create(req.body);
-    res.redirect("/articles/" + article.id);
+    let article;
+    try {
+      article = await Article.create(req.body);
+      res.redirect("/articles/" + article.id);
+    } catch (err) {
+      if (err.name === "SequelizeValidationError") {
+        article = await Article.build(req.body);
+        res.render("articles/new", {
+          article,
+          errors: err.errors,
+          title: "New Article",
+        });
+      } else {
+        throw err;
+      }
+    }
   })
 );
 
@@ -66,13 +80,28 @@ router.get(
 router.post(
   "/:id/edit",
   asyncHandler(async (req, res) => {
-    const article = await Article.findByPk(req.params.id);
-    if (article) {
-      await article.update(req.body);
-    } else {
-      res.sendStatus(404);
+    let article;
+    try {
+      article = await Article.findByPk(req.params.id);
+      if (article) {
+        await article.update(req.body);
+        res.redirect("/articles/" + article.id);
+      } else {
+        res.sendStatus(404);
+      }
+    } catch (err) {
+      if (err.name === "SequelizeValidationError") {
+        article = await Article.build(req.body);
+        article.id = req.params.id;
+        res.render("articles/edit", {
+          article,
+          errors: err.errors,
+          title: "Edit Title",
+        });
+      } else {
+        throw err;
+      }
     }
-    res.redirect("/articles/" + article.id);
   })
 );
 
