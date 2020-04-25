@@ -41,7 +41,11 @@ router.get(
   "/:id/edit",
   asyncHandler(async (req, res) => {
     const article = await Article.findByPk(req.params.id);
-    res.render("articles/edit", { article, title: "Edit Article" });
+    if (article) {
+      res.render("articles/edit", { article, title: "Edit Article" });
+    } else {
+      res.sendStatus(404);
+    }
   })
 );
 
@@ -50,7 +54,11 @@ router.get(
   "/:id",
   asyncHandler(async (req, res) => {
     const article = await Article.findByPk(req.params.id);
-    res.render("articles/show", { article, title: article.title });
+    if (article) {
+      res.render("articles/show", { article, title: article.title });
+    } else {
+      res.sendStatus(404);
+    }
   })
 );
 
@@ -59,7 +67,11 @@ router.post(
   "/:id/edit",
   asyncHandler(async (req, res) => {
     const article = await Article.findByPk(req.params.id);
-    await article.update(req.body);
+    if (article) {
+      await article.update(req.body);
+    } else {
+      res.sendStatus(404);
+    }
     res.redirect("/articles/" + article.id);
   })
 );
@@ -69,7 +81,11 @@ router.get(
   "/:id/delete",
   asyncHandler(async (req, res) => {
     const article = await Article.findByPk(req.params.id);
-    res.render("articles/delete", { article, title: "Delete Article" });
+    if (article) {
+      res.render("articles/delete", { article, title: "Delete Article" });
+    } else {
+      res.sendStatus(404);
+    }
   })
 );
 
@@ -78,7 +94,11 @@ router.post(
   "/:id/delete",
   asyncHandler(async (req, res) => {
     const article = await Article.findByPk(req.params.id);
-    await article.destroy();
+    if (article) {
+      await article.destroy();
+    } else {
+      res.sendStatus(404);
+    }
     res.redirect("/articles");
   })
 );
