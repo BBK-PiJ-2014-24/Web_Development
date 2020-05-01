@@ -9,11 +9,24 @@ function checkForShip(player, coordinates) {
         actualCoordinates[1] === coordinates[1]
       );
     })[0];
-    if (!shipPresent) {
-      return false;
+    if (shipPresent) {
+      return ship;
     }
   }
-  //return true;
+  return false;
+}
+
+function damageShip(ship, coordinates) {
+  ship.damage.push(coordinates); // add the damage coordinates to damage attribute
+}
+
+function fire(player, coordinates) {
+  var ship = checkForShip(player, coordinates);
+  if (ship) {
+    damageShip(ship, coordinates);
+  }
 }
 
 module.exports.checkForShip = checkForShip;
+module.exports.damageShip = damageShip;
+module.exports.fire = fire;
