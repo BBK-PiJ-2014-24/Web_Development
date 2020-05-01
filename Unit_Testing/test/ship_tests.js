@@ -74,8 +74,11 @@ describe("Ship Damage Test Suite", () => {
 
 describe("Test Suite for Player Firing Hit", () => {
   var fire = require("../game_logic/ship_methods").fire;
-  it("Test a Fire at a given coordinate", () => {
-    var player = {
+  // SET UP Before Each
+  // ------------------
+  var player;
+  beforeEach(() => {
+    player = {
       ships: [
         {
           locations: [[0, 0]],
@@ -83,22 +86,23 @@ describe("Test Suite for Player Firing Hit", () => {
         },
       ],
     };
+  });
+
+  it("Test a Fire at a given coordinate", () => {
     fire(player, [0, 0]);
 
     expect(player.ships[0].damage[0]).to.deep.equal([0, 0]);
   });
 
   it("Test a Fire at a given coordinate", () => {
-    var player = {
-      ships: [
-        {
-          locations: [[0, 0]],
-          damage: [],
-        },
-      ],
-    };
     fire(player, [9, 9]);
 
     expect(player.ships[0].damage).to.be.empty;
+  });
+
+  // TEAR DOWN
+  // ---------
+  after(() => {
+    console.log("**** End of Test Suite ****");
   });
 });
