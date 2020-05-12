@@ -1,107 +1,75 @@
-// Components can be functions or classes but MUST start with a CAPITAL LETTER
-// Components return React Elements
-// function Headerfn() {
-// function Headerfn() {
-//   return (
-//     <header>
-//       <h1> Scorecard</h1>
-//       <span className="stats">Player: 1</span>
-//     </header>
-//   );
-// }
-// ES6 Style
-// ----------
-// const Headerfn = () => {
-//   return (
-//     <header>
-//       <h1> Scorecard</h1>
-//       <span className="stats">Player: 1</span>
-//     </header>
-//   );
-// };
-// ARRAYS in REACT
-// ---------------
-// child elements must have id as they are used as an index in the React-Dom
-// These ids must be passed as a KEY IF THEY ARE ITERATED OVER to become Childs
-const players = [
-  {
-    id: 1,
-    name: "Guil",
-    score: 50,
-  },
-  {
-    id: 2,
-    name: "Treasure",
-    score: 85,
-  },
-  {
-    id: 3,
-    name: "Ashley",
-    score: 95,
-  },
-  {
-    id: 4,
-    name: "James",
-    score: 80,
-  },
-];
-// PROPS
-// -----
-// props are immutable), funtions can ever change them. The (parent) component higher
-// in the tree owns and controls the property values.
-// props can be propogated down into subcomponents, whereever they are called.
-// Props are used in "Stateless Functional Components"
-//
-// STATE
-// -----
-// to mutate dynamic data, one uses variables in a state object
-// State Can only be included in class objects.
+const Header = (props) => {
+  return (
+    <header>
+      <h1>{props.title}</h1>
+      <span className="stats">Players: {props.totalPlayers}</span>
+    </header>
+  );
+};
 
-// ES6 + Implicit Return
-// --------------------
-const Headerfn = (props) => (
-  <header>
-    <h1> {props.titleProp}</h1>
-    <span className="stats">Player: {props.totalPlayersProp}</span>
-  </header>
-);
-
-// Player Component with Counter Component as Composition
-// ----------------
 const Player = (props) => {
   return (
     <div className="player">
-      <span className="player-name">{props.name}</span>
+      <span className="player-name">
+        <button
+          className="remove-player"
+          onClick={() => props.removePlayer(props.id)}
+        >
+          ✖
+        </button>
+        {props.name}
+      </span>
+
       <Counter />
     </div>
   );
 };
 
-// Counter Component
-// -----------------
 class Counter extends React.Component {
-  //   constructor() {
-  //     super();
-  //     this.state = {
-  //       score: 0,
-  //     };
-  //   }
-  // state can be initialized like as a class property and babel will wrap it in a constructor behind the scences
   state = {
     score: 0,
   };
 
-  // Add Event Handlers on the Class
-  incrementScore() {}
+  // incrementScore = () => {
+  //   this.setState( prevState => ({
+  //     score: prevState.score + 1
+  //   }));
+  // }
+
+  // decrementScore = () => {
+  //   this.setState( prevState => ({
+  //     score: prevState.score - 1
+  //   }));
+  // }
+
+  incrementScore() {
+    this.setState((prevState) => {
+      return {
+        score: prevState.score + 1,
+      };
+    });
+  }
+
+  decrementScore = () => {
+    this.setState((prevState) => ({
+      score: prevState.score - 1,
+    }));
+  };
 
   render() {
     return (
       <div className="counter">
-        <button className="counter-action decrement"> - </button>
+        <button
+          className="counter-action decrement"
+          onClick={this.decrementScore}
+        >
+          {" "}
+          -{" "}
+        </button>
         <span className="counter-score">{this.state.score}</span>
         <button
           className="counter-action increment"
-          onClick={this.incrementScore}
+          onClick={() => this.incrementScore()}
         >
           {" "}
           +{" "}
@@ -111,30 +79,53 @@ class Counter extends React.Component {
   }
 }
 
-// Main Container Component
-// -------------------------
-// Dynamic data passed to the component through "Props", which are key-value attributes in the tag
-// Note that the KEY must be passed so that REACT can index child components
-// Note also that the MAP needs to be wrapped in a {map()} as it is a javascript function
-const App = (props) => {
-  return (
-    <div className="scoreboard">
-      <Headerfn
-        titleProp="ScoreCard"
-        totalPlayersProp={props.initalPlayersProp.length}
-      />
-      {/* Player List*/}
-      {props.initalPlayersProp.map((p) => (
-        <Player name={p.name} key={p.id.toString()} />
-      ))}
-    </div>
-  );
-};
+class App extends React.Component {
+  state = {
+    players: [
+      {
+        name: "Guil",
+        id: 1,
+      },
+      {
+        name: "Treasure",
+        id: 2,
+      },
+      {
+        name: "Ashley",
+        id: 3,
+      },
+      {
+        name: "James",
+        id: 4,
+      },
+    ],
+  };
 
-// update the DOM - react(renderObj, the container to put the element in)
-// ---------------
-// <Headerfn /> is a JSX React Component, identified by its capital LETTER
-ReactDOM.render(
-  <App initalPlayersProp={players} />,
-  document.getElementById("root")
-);
+  handleRemoverPlayer = (id) => {
+    this.setState = (prevState) => {
+      return {
+        players: prevState.filter((p) => p.id !== id),
+      };
+    };
+  };
+
+  render() {
+    return (
+      <div className="scoreboard">
+        <Header title="Scoreboard" totalPlayers={this.state.players.length} />
+
+        {/* Players list */}
+        {this.state.players.map((player) => (
+          <Player
+            name={player.name}
+            id={player.id}
+            key={player.id.toString()}
+            removePlayer={this.handleRemovePlayer}
+          />
+        ))}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
