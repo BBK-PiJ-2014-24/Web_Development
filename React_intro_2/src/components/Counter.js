@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // props destructuring of props right from the function signature
 const Counter = ({ index, score, changeScore }) => {
@@ -21,6 +22,14 @@ const Counter = ({ index, score, changeScore }) => {
       </button>
     </div>
   );
+};
+
+//Type Check on Properties
+// -----------------------
+Counter.propTypes = {
+  index: PropTypes.number,
+  score: PropTypes.number,
+  changeScore: PropTypes.func,
 };
 
 export default Counter;
