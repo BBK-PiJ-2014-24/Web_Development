@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Icon from "./Icon";
 import Counter from "./Counter";
 
 // PureComponent only updates and renders the element that has changed not the component.
-// PropTypes can be inserted as a property on
+// PropTypes can be inserted as a property on a class
 class Player extends PureComponent {
   static propTypes = {
     changeScore: PropTypes.func,
@@ -11,7 +12,8 @@ class Player extends PureComponent {
     name: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     id: PropTypes.number,
-    index: PropTypes,
+    index: PropTypes.number,
+    isHighScore: PropTypes.bool,
   };
 
   render() {
@@ -22,6 +24,7 @@ class Player extends PureComponent {
           <button className="remove-player" onClick={() => removePlayer(id)}>
             ✖
           </button>
+          <Icon isHighScore={this.props.isHighScore} />
           {name}
         </span>
 

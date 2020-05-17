@@ -61,9 +61,19 @@ class App extends Component {
     });
   };
 
+  getHighScore = () => {
+    const scoreArr = this.state.players.map((p) => p.score);
+    const maxScore = Math.max(...scoreArr); // max  must work on spread operator
+    if (maxScore) {
+      return maxScore;
+    }
+    return null; // if there are no players
+  };
+
   // render
   // ------
   render() {
+    const highScore = this.getHighScore();
     return (
       <div className="scoreboard">
         <Header title="Scoreboard" players={this.state.players} />
@@ -78,6 +88,7 @@ class App extends Component {
             index={index}
             changeScore={this.handleScoreChange}
             removePlayer={this.handleRemovePlayer}
+            isHighScore={highScore === player.score} // boolean on whether a a high score
           />
         ))}
         <AddPlayerForm addPlayer={this.handleAddPlayer} />
