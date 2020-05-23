@@ -65,15 +65,18 @@ class App extends Component {
   // Wrap the return with Provider element passing prop as an attribute
   render() {
     return (
-      <Provider value={this.state.players}>
+      <Provider
+        value={{
+          players: this.state.players,
+          actions: {
+            changeScore: this.handleScoreChange,
+          },
+        }}
+      >
         <div className="scoreboard">
           <Header />
 
-          <PlayerList
-            players={this.state.players}
-            changeScore={this.handleScoreChange}
-            removePlayer={this.handleRemovePlayer}
-          />
+          <PlayerList removePlayer={this.handleRemovePlayer} />
 
           <AddPlayerForm addPlayer={this.handleAddPlayer} />
         </div>
