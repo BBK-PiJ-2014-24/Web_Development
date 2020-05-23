@@ -62,7 +62,8 @@ class App extends Component {
     });
   };
 
-  // Wrap the return with Provider element passing prop as an attribute
+  // Wrap the return with Provider element passing prop as an object of attributes, where
+  // functions are passed in sub object called actions
   render() {
     return (
       <Provider
@@ -70,15 +71,17 @@ class App extends Component {
           players: this.state.players,
           actions: {
             changeScore: this.handleScoreChange,
+            removePlayer: this.handleRemovePlayer,
+            addPlayer: this.handleAddPlayer,
           },
         }}
       >
         <div className="scoreboard">
           <Header />
 
-          <PlayerList removePlayer={this.handleRemovePlayer} />
+          <PlayerList />
 
-          <AddPlayerForm addPlayer={this.handleAddPlayer} />
+          <AddPlayerForm />
         </div>
       </Provider>
     );
