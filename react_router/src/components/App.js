@@ -6,6 +6,7 @@ import About from "./About";
 import Teachers from "./Teachers";
 import Courses from "./Courses";
 import NotFound from "./NotFound";
+import Featured from "./Featured";
 
 // Use BrowserRouter Component to contain all routes
 // Use Route component for each route
@@ -13,6 +14,7 @@ import NotFound from "./NotFound";
 // matches are found then defaults to error page
 // If there are no props, use component={}
 // If using props, use a render={component +props}
+// The params within the URL are captures in the match object within the automatic Route prop
 const App = () => (
   <BrowserRouter>
     <div className="container">
@@ -20,7 +22,8 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" render={() => <About title="About Title" />} />
-        <Route path="/teachers" component={Teachers} />
+        <Route exact path="/teachers" component={Teachers} />
+        <Route path="/teachers/:topic/:name" component={Featured} />
         <Route path="/courses" component={Courses} />
         <Route component={NotFound} />
       </Switch>
