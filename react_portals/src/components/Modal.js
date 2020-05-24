@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
-class Modal extends Component {
+class Modal extends Component {
   render() {
-    return (
-
+    return ReactDOM.createPortal(
+      this.props.children,
+      document.getElementById("my-portal")
     );
   }
 }
