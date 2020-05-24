@@ -1,5 +1,5 @@
 {
-  "name": "course-directory",
+  "name": "react_router",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
