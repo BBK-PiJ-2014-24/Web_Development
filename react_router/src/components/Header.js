@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+// <Link /> is a React Router component allows users to navigate between routes?
+// <NavLink /> is a Link that allows u to change the css stlying, when u hit it
 const Header = () => (
   <header>
     <span className="icn-logo">
