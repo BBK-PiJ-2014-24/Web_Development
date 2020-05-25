@@ -31,6 +31,7 @@ export default class App extends Component {
   // AXIOS METHOD
   // ------------
   componentDidMount() {
+    this.performSearch();
     //   axios
     //     .get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC")
     //     .then((response) => {
@@ -42,8 +43,10 @@ export default class App extends Component {
     //       console.log("Error fetching and parsing data", error);
     //     });
   }
-
-  performSearch = (query) => {
+  // Search Driven API function
+  // ---------------------------
+  // default is cats
+  performSearch = (query = "cats") => {
     axios
       .get(
         `http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`
