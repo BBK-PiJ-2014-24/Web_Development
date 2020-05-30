@@ -1,0 +1,1 @@
+NOTE: This App does not use Node.js. So the APP needs to be lauhced with python3.http.server.
